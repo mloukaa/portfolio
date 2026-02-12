@@ -46,3 +46,10 @@ const closeLightbox = () => {
 };
 closeBtn.addEventListener("click", closeLightbox);
 lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
+// Simple Mobile Menu Toggle
+    const navLinks = document.querySelector('.nav-links');
+    const logo = document.querySelector('.logo');
+    
+    logo.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
