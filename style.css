@@ -499,4 +499,79 @@ h2 {
     margin-top: 5px !important;
 }
 
+@media (max-width: 768px) {
+    /* 1. Universal Centering */
+    .hero, .hero-container, .hero-text, .hero-actions, 
+    .hero-about-pro, .section-header, .contact-container {
+        text-align: center !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100% !important;
+    }
+
+    /* 2. Fix the Big Title (No more 1 word per line) */
+    .hero h1 {
+        font-size: 28px !important; /* Smaller so words stay together */
+        line-height: 1.3 !important;
+        max-width: 90%; /* Limits width so it doesn't hit screen edges */
+        margin: 0 auto 20px auto !important;
+        padding-right: 0 !important;
+        display: block !important;
+    }
+
+    /* 3. Fix the About Description (Fixing the "2 words per line" issue) */
+    .hero-about-pro {
+        border-left: none !important;
+        border-top: 1px solid #3b82f6 !important;
+        border-radius: 0 !important;
+        background: rgba(255, 255, 255, 0.03) !important;
+        margin-top: 30px !important;
+        padding: 30px 15px !important;
+        width: 100% !important;
+    }
+
+    .about-description {
+        font-size: 16px !important;
+        line-height: 1.6 !important;
+        max-width: 100% !important; /* Forces it to use the full width */
+        text-align: center !important;
+        display: block !important;
+    }
+
+    /* 4. Navigation Clean-up */
+    .nav {
+        padding: 20px !important;
+        justify-content: center !important;
+    }
+    .nav-links {
+        display: none; /* Keep it clean for now */
+    }
+
+    /* 5. Force Grids to behave */
+    .experience-grid, .card-grid, .portfolio {
+        grid-template-columns: 1fr !important;
+        width: 100% !important;
+        padding: 0 10px !important;
+    }
+
+    .project.wide {
+        grid-column: span 1 !important;
+    }
+
+    /* 6. Fix Button Width */
+    .premium-btn {
+        width: auto !important;
+        min-width: 200px !important;
+        padding: 14px 30px !important;
+    }
+
+    /* 7. Fix Section Titles */
+    section h2 {
+        font-size: 24px !important;
+        width: 90% !important;
+        margin: 40px auto 20px auto !important;
+    }
+}
 
