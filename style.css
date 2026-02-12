@@ -141,18 +141,18 @@ header { position: fixed; width: 100%; top: 0; background: rgba(0,0,0,0.4); back
 
 }
 
+
 /* --- MOBILE RESPONSIVE OVERRIDES --- */
 
 @media (max-width: 1024px) {
+    /* Deletes the background logo image on mobile */
+    .hero-bg-image {
+        display: none;
+    }
+
     .hero-container {
         grid-template-columns: 1fr;
         text-align: center;
-    }
-    
-    .hero-bg-image {
-        width: 100%;
-        right: 0;
-        opacity: 0.08;
     }
 
     .hero-about-pro {
@@ -181,11 +181,11 @@ header { position: fixed; width: 100%; top: 0; background: rgba(0,0,0,0.4); back
 
     /* Hero adjustments */
     .hero {
-        padding: 120px 20px 60px;
+        padding: 100px 20px 60px;
     }
 
     .hero h1 {
-        font-size: 40px;
+        font-size: 38px;
     }
 
     /* Section Spacing */
@@ -208,7 +208,7 @@ header { position: fixed; width: 100%; top: 0; background: rgba(0,0,0,0.4); back
 
     /* Review Cards */
     .review-card {
-        width: 300px;
+        width: 290px;
         padding: 25px;
     }
 
@@ -224,3 +224,7 @@ header { position: fixed; width: 100%; top: 0; background: rgba(0,0,0,0.4); back
         font-size: 45px;
     }
 }
+
+```
+
+Would you like me to adjust the transparency of the background gradient for mobile as well, to make the text even easier to read?
