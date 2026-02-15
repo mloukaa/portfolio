@@ -58,58 +58,59 @@ header { position: fixed; width: 100%; top: 0; background: rgba(0,0,0,0.4); back
 .portfolio-spacer { height: 70px; } /* Breath room requested */
 .portfolio {
     display: grid;
-    /* Changed from 250px to 320px to match .info-card */
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)) !important; 
-    gap: 35px !important; /* Matches the gap in your .card-grid */
+    /* Changed min size to 350px to match your Info Card width */
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)) !important; 
+    gap: 35px !important; /* Matches the gap in your info-card grid */
 }
 
 /* 2. Set a strict small size for the project card */
 .project {
-    /* Increased to match the substantial feel of the info-cards */
-    height: 500px !important; 
-    background: rgba(255, 255, 255, 0.03); /* Matches .info-card background */
+    height: 520px !important; /* Increased total height to match Info Cards */
+    background: rgba(255, 255, 255, 0.03); /* Glass effect matching Info Cards */
     backdrop-filter: blur(20px);
-    border-radius: 30px; /* Matches .info-card border-radius */
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 30px !important; /* Matches your premium Info Card corners */
     overflow: hidden;
     display: flex;
     flex-direction: column;
     border: 1px solid rgba(255, 255, 255, 0.08);
-    transition: all 0.4s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-@media (min-width: 1024px) { .project.wide { grid-column: span 2; } }
-.project img {
-    width: 100% !important;
-    height: 350px !important; /* Increased image area */
-    object-fit: cover !important;
-    object-position: top !important; 
-    display: block !important;
-}
+
 .project:hover {
     transform: translateY(-10px);
     border-color: #3b82f6;
     background: rgba(59, 130, 246, 0.05);
 }
 
+.project img {
+    width: 100% !important;
+    height: 380px !important; /* Larger display area for your designs */
+    object-fit: cover !important;
+    object-position: top !important; 
+    display: block !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
 /* 4. Shrink the text area to fit the smaller card */
 
 .project-info {
-    padding: 30px !important; /* Increased padding to match info-card style */
+    padding: 25px 30px !important; /* More breathable padding */
     background: transparent;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
+
 .project-info h3 {
-    font-size: 1.5rem !important; /* Larger title */
+    font-size: 1.4rem !important; /* Bold, clear title */
     font-weight: 800;
-    color: white;
+    margin-bottom: 5px !important;
 }
 
 .project-info p {
-    font-size: 1rem !important; /* Larger subtitle */
+    font-size: 1rem !important; /* Professional subtitle size */
     color: #94a3b8;
-    margin-top: 10px !important;
 }
 .load-more-container { display: flex; justify-content: center; padding: 80px 0; }
 .extra-project { display: none; opacity: 0; transform: translateY(30px); }
@@ -574,6 +575,7 @@ h2 {
 .extra-project.show {
     display: flex !important; /* or 'block' depending on your card style */
 }
+
 
 
 
