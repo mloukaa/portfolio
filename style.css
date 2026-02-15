@@ -669,6 +669,46 @@ h2 {
 }
 
 
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 768px) {
+    /* 1. Force the grid to a single column */
+    #project-container {
+        grid-template-columns: 1fr !important; /* One project per row */
+        gap: 20px !important;
+        padding: 10px !important;
+    }
+
+    /* 2. Ignore 'wide' setting on mobile so cards don't break the screen */
+    .project.wide {
+        grid-column: span 1 !important;
+    }
+
+    /* 3. Adjust image height so it's not too tall on small screens */
+    .project img {
+        height: 250px !important;
+    }
+
+    /* 4. Make text a bit smaller for mobile readability */
+    .project-info h3 {
+        font-size: 1.1rem !important;
+    }
+
+    .project-info p {
+        font-size: 0.85rem !important;
+    }
+
+    /* 5. Lightbox adjustments for thumbs/fingers */
+    .modal-content {
+        width: 95% !important;
+        max-height: 80vh !important;
+    }
+
+    .close-modal {
+        top: 20px;
+        right: 20px;
+        font-size: 40px; /* Bigger target to tap */
+    }
+}
 
 
 
