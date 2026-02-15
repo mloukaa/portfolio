@@ -16,126 +16,73 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 const projectContainer = document.getElementById('project-container');
-
-// Load Data
-onSnapshot(query(collection(db, "projects"), orderBy("createdAt", "desc")), (snapshot) => {
-    console.log("Database connection successful!"); // Checkpoint 1
-    
-    if (!projectContainer) {
-        console.error("Error: Could not find project-container in HTML!"); // Checkpoint 2
-        return;
-    }
-
-    if (snapshot.empty) {
-        console.warn("Database is empty or collection name is wrong."); // Checkpoint 3
-        projectContainer.innerHTML = "<p>No projects found in database.</p>";
-        return;
-    }
-    const projects = [];
-snapshot.forEach(doc => projects.push(doc.data()));
-
-// 2. Sort: Normal projects first (isExtra: false), Extra projects last (isExtra: true)
-projects.sort((a, b) => (a.isExtra === b.isExtra) ? 0 : a.isExtra ? 1 : -1);
-
-// 3. Clear and Render
-projectContainer.innerHTML = ""; 
-
-projects.forEach((data) => {
-    const projectHTML = `
-        <div class="project ${data.isWide ? 'wide' : ''} ${data.isExtra ? 'extra-project' : ''}">
-            <img src="${data.imageUrl}" alt="${data.title}" class="project-img">
-            <div class="project-info">
-                <h3>${data.title}</h3>
-                <p>${data.subtitle}</p>
-            </div>
-        </div>
-    `;
-    projectContainer.insertAdjacentHTML('beforeend', projectHTML);
-});
-
-   projectContainer.innerHTML = ""; 
-
-// 2. Convert snapshot to an array so we can sort it
-const projectsArray = [];
-snapshot.forEach(doc => projectsArray.push(doc.data()));
-
-// 3. SORT: Move items where isExtra is true to the end
-projectsArray.sort((a, b) => {
-    return (a.isExtra === b.isExtra) ? 0 : a.isExtra ? 1 : -1;
-});
-
-// 4. Now run your loop on the SORTED array
-projectsArray.forEach((data) => {
-    const projectHTML = `
-        <div class="project ${data.isWide ? 'wide' : ''} ${data.isExtra ? 'extra-project' : ''}">
-            <img src="${data.imageUrl}" alt="${data.title}" class="project-img">
-            <div class="project-info">
-                <h3>${data.title}</h3>
-                <p>${data.subtitle}</p>
-            </div>
-        </div>
-    `;
-    projectContainer.insertAdjacentHTML('beforeend', projectHTML);
-});
-
-    setupLightbox();
-});
-// Lightbox logic
-function setupLightbox() {
-    const lightbox = document.getElementById("lightbox");
-    const lightboxImg = document.getElementById("lightbox-img");
-    document.querySelectorAll(".project-img").forEach(img => {
-        img.onclick = () => {
-            lightboxImg.src = img.getAttribute("data-full");
-            lightbox.style.display = "flex";
-            document.body.style.overflow = "hidden";
-        };
-    });
-}
-
-// Global Close for Lightbox
-const closeBtn = document.querySelector(".close");
-if (closeBtn) {
-    closeBtn.onclick = () => {
-        document.getElementById("lightbox").style.display = "none";
-        document.body.style.overflow = "auto";
-    };
-}
 const loadMoreBtn = document.getElementById('loadMoreBtn');
 
+// 1. DATA LOADING & SORTING
+onSnapshot(query(collection(db, "projects"), orderBy("createdAt", "desc")), (snapshot) => {
+    console.log("Database connected!");
+    
+    if (!projectContainer) return;
+
+    if (snapshot.empty) {
+        projectContainer.innerHTML = "<p>No projects found.</p>";
+        return;
+    }
+
+    // Convert to array and sort (Extra projects forced to the bottom)
+    const projectsArray = [];
+    snapshot.forEach(doc => projectsArray.push(doc.data()));
+    
+    projectsArray.sort((a, b) => (a.isExtra === b.isExtra) ? 0 : a.isExtra ? 1 : -1);
+
+    // Clear and render only ONCE
+    projectContainer.innerHTML = ""; 
+
+    projectsArray.forEach((data) => {
+        const projectHTML = `
+            <div class="project ${data.isWide ? 'wide' : ''} ${data.isExtra ? 'extra-project' : ''}">
+                <img src="${data.imageUrl}" alt="${data.title}" class="project-img">
+                <div class="project-info">
+                    <h3>${data.title}</h3>
+                    <p>${data.subtitle}</p>
+                </div>
+            </div>
+        `;
+        projectContainer.insertAdjacentHTML('beforeend', projectHTML);
+    });
+
+    // Re-show load more button if extra projects exist
+    const hasExtras = document.querySelectorAll('.extra-project').length > 0;
+    if (loadMoreBtn && hasExtras) {
+        loadMoreBtn.style.display = 'inline-block';
+    }
+});
+
+// 2. LOAD MORE BUTTON LOGIC
 if (loadMoreBtn) {
     loadMoreBtn.onclick = () => {
-        console.log("Load More clicked!"); // Check your F12 console for this!
-        
         const extraProjects = document.querySelectorAll('.extra-project');
-        
-        if (extraProjects.length === 0) {
-            alert("No extra projects found in the database yet.");
+        if (extraProjects.length > 0) {
+            extraProjects.forEach(p => p.classList.add('show'));
+            loadMoreBtn.style.display = 'none';
         } else {
-            extraProjects.forEach(p => {
-                p.classList.add('show');
-            });
-            loadMoreBtn.style.display = 'none'; // Hide button after showing everything
+            alert("No more projects to load!");
         }
     };
 }
-if (userEntry === SECRET_PASSWORD) {
-    document.body.classList.add('authorized');
-} else {
-    window.location.href = "index.html";
-}
-const projectContainer = document.getElementById('project-container');
 
-projectContainer.addEventListener('click', (e) => {
-    // Check if what we clicked is a project image
-    if (e.target.classList.contains('project-img')) {
-        const fullImageUrl = e.target.getAttribute('src'); // Get the image source
-        openFullSize(fullImageUrl);
-    }
-});
+// 3. FULL SIZE LIGHTBOX LOGIC
+// We listen on the container for clicks to handle dynamic content
+if (projectContainer) {
+    projectContainer.addEventListener('click', (e) => {
+        if (e.target.classList.contains('project-img')) {
+            const fullImageUrl = e.target.getAttribute('src');
+            openFullSize(fullImageUrl);
+        }
+    });
+}
 
 function openFullSize(url) {
-    // Look for an existing modal or create one
     let modal = document.getElementById('photo-modal');
     
     if (!modal) {
@@ -147,13 +94,18 @@ function openFullSize(url) {
         `;
         document.body.appendChild(modal);
         
-        // Close when clicking the X or the background
-        modal.onclick = () => modal.style.display = "none";
+        // Close when clicking background or X
+        modal.onclick = (e) => {
+            if (e.target.id === 'photo-modal' || e.target.classList.contains('close-modal')) {
+                modal.style.display = "none";
+                document.body.style.overflow = "auto";
+            }
+        };
     }
 
     const fullImg = document.getElementById('full-img');
     fullImg.src = url;
     modal.style.display = "flex";
+    document.body.style.overflow = "hidden"; // Prevent scrolling
 }
-
 
