@@ -124,5 +124,36 @@ if (userEntry === SECRET_PASSWORD) {
 } else {
     window.location.href = "index.html";
 }
+const projectContainer = document.getElementById('project-container');
+
+projectContainer.addEventListener('click', (e) => {
+    // Check if what we clicked is a project image
+    if (e.target.classList.contains('project-img')) {
+        const fullImageUrl = e.target.getAttribute('src'); // Get the image source
+        openFullSize(fullImageUrl);
+    }
+});
+
+function openFullSize(url) {
+    // Look for an existing modal or create one
+    let modal = document.getElementById('photo-modal');
+    
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'photo-modal';
+        modal.innerHTML = `
+            <span class="close-modal">&times;</span>
+            <img class="modal-content" id="full-img">
+        `;
+        document.body.appendChild(modal);
+        
+        // Close when clicking the X or the background
+        modal.onclick = () => modal.style.display = "none";
+    }
+
+    const fullImg = document.getElementById('full-img');
+    fullImg.src = url;
+    modal.style.display = "flex";
+}
 
 
