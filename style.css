@@ -63,7 +63,7 @@ header { position: fixed; width: 100%; top: 0; background: rgba(0,0,0,0.4); back
     padding: 40px 0 !important;
 }
 
-/* 2. The Standard Project Card */
+/* 2. Set a strict small size for the project card */
 .project {
     height: 550px !important; 
     background: rgba(255, 255, 255, 0.03) !important; 
@@ -87,8 +87,6 @@ header { position: fixed; width: 100%; top: 0; background: rgba(0,0,0,0.4); back
     object-fit: cover !important;
     object-position: top !important;
 }
-}
-
 /* 4. Shrink the text area to fit the smaller card */
 
 .project-info {
@@ -584,9 +582,7 @@ h2 {
 
 
 
-
-
-
+in the css i wantt the work card size big as the info card size
 
 
 
