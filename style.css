@@ -72,13 +72,13 @@ header { position: fixed; width: 100%; top: 0; background: rgba(0,0,0,0.4); back
     padding: 120px 60px !important; 
 }
 .portfolio-spacer { height: 70px; } /* Breath room requested */
-.project, 
-.project.wide, 
+.project, 
+.project.wide, 
 .extra-project.show {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: flex-start !important; /* Forces everything to stay left */
-    text-align: left !important;
+    display: flex !important;
+    flex-direction: column !important;
+    height: auto !important; /* Allow cards to match content */
+    align-items: flex-start !important; /* Align everything to the left */
 }
 .portfolio {
     display: grid !important;
@@ -107,39 +107,35 @@ header { position: fixed; width: 100%; top: 0; background: rgba(0,0,0,0.4); back
     border-color: #3b82f6 !important;
 }
 .project img {
-    width: 100% !important;
-    height: 340px !important; /* Uniform image height */
-    object-fit: cover !important;
+    width: 100% !important;
+    height: 340px !important; 
+    object-fit: cover !important;
 }
 /* 4. Shrink the text area to fit the smaller card */
 
 .project-info {
-    /* Fixed internal padding - This must be identical on all cards */
-    padding: 30px 35px !important; 
-    
-    /* We switch to 'block' to stop the wide-card stretching */
-    display: block !important; 
-    width: 100% !important;
-    box-sizing: border-box !important;
-    
-    /* Remove any leftover flex alignment */
-    justify-content: flex-start !important;
-    align-items: flex-start !important;
+    /* Fixed padding so text starts at the same spot on EVERY card */
+    padding: 25px 35px !important; 
+    width: 100% !important;
+    box-sizing: border-box !important;
+    
+    /* REMOVE centering logic that causes the "gap" difference */
+    display: block !important; 
+    justify-content: flex-start !important;
+    flex-grow: 0 !important; 
 }
 
 .project-info h3 {
-    margin: 0 0 8px 0 !important; /* Fixed gap between title and subtitle */
-    font-size: 1.4rem !important;
-    line-height: 1.2 !important;
-    width: 100% !important;
+    margin: 0 0 5px 0 !important; /* Tight, consistent gap */
+    font-size: 1.4rem;
+    text-align: left !important;
 }
 
 .project-info p {
-    margin: 0 !important;
-    font-size: 0.95rem !important;
-    line-height: 1.5 !important;
-    width: 100% !important;
-    max-width: 90%; /* Prevents text from stretching too far on wide cards */
+    margin: 0 !important;
+    font-size: 0.95rem;
+    text-align: left !important;
+    line-height: 1.4;
 }
 .load-more-container { display: flex; justify-content: center; padding: 80px 0; }
 .extra-project { display: none; opacity: 0; transform: translateY(30px); }
@@ -659,5 +655,5 @@ h2 {
 @keyframes zoomIn {
     from { transform: scale(0.5); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
-}
+} fiw what most be fixed and keep the rest the same and send me the full code
 
