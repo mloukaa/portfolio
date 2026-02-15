@@ -91,46 +91,60 @@ section h2 {
 .work { padding: 100px 60px; }
 .portfolio {
     display: grid !important;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)) !important;
-    gap: 35px !important;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)) !important; /* Matches .card-grid */
+    gap: 35px !important; /* Matches .card-grid gap */
+    padding: 60px 0 !important;
 }
 
-/* Wide Card Logic */
-@media (min-width: 1024px) {
-    .project.wide { grid-column: span 2 !important; }
-}
-
+/* 2. MATCH THE CARD DIMENSIONS */
 .project {
-    height: 550px !important; /* MATCHES INFO CARD SIZE */
+    /* This height (580px) is the typical height of your info cards with 80px padding */
+    height: 580px !important; 
     background: rgba(255, 255, 255, 0.03) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    border-radius: 30px !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-radius: 30px !important; /* Matches .info-card radius */
+    border: 1px solid rgba(255, 255, 255, 0.08) !important; /* Matches .info-card border */
     overflow: hidden !important;
     display: flex !important;
     flex-direction: column !important;
-    backdrop-filter: blur(20px) !important;
-    transition: 0.4s ease;
+    transition: transform 0.3s ease !important;
 }
 
 .project:hover { transform: translateY(-10px); border-color: #3b82f6 !important; }
 
 .project img {
     width: 100% !important;
-    height: 380px !important; 
+    height: 350px !important; /* Fixed height to leave room for text below */
     object-fit: cover !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
 }
 
 .project-info {
-    padding: 30px !important;
+    padding: 45px !important; /* Matches the side padding of your info cards */
     flex-grow: 1 !important;
     display: flex !important;
     flex-direction: column !important;
-    justify-content: center !important;
+    justify-content: flex-start !important; /* Align text to top of the area */
+    text-align: left !important;
 }
 
-.project-info h3 { font-size: 1.5rem !important; font-weight: 800; }
-.project-info p { color: #94a3b8 !important; margin-top: 10px; }
+.project-info h3 {
+    font-size: 24px !important; /* Premium title size */
+    font-weight: 800 !important;
+    margin-bottom: 10px !important;
+    color: white !important;
+}
 
+.project-info p {
+    font-size: 16px !important;
+    color: #94a3b8 !important;
+    line-height: 1.6 !important;
+@media (min-width: 1024px) {
+    .project.wide {
+        grid-column: span 2 !important;
+    }
+}
 /* --- REVIEWS --- */
 .testimonials { padding: 100px 0; overflow: hidden; }
 .marquee-content { display: flex; gap: 30px; animation: scroll 40s linear infinite; }
@@ -163,3 +177,4 @@ section h2 {
 
 /* --- CONTACT --- */
 .contact { padding: 150px 60px; text-align: center; }
+
