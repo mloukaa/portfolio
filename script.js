@@ -31,6 +31,27 @@ onSnapshot(query(collection(db, "projects"), orderBy("createdAt", "desc")), (sna
         projectContainer.innerHTML = "<p>No projects found in database.</p>";
         return;
     }
+    const projects = [];
+snapshot.forEach(doc => projects.push(doc.data()));
+
+// 2. Sort: Normal projects first (isExtra: false), Extra projects last (isExtra: true)
+projects.sort((a, b) => (a.isExtra === b.isExtra) ? 0 : a.isExtra ? 1 : -1);
+
+// 3. Clear and Render
+projectContainer.innerHTML = ""; 
+
+projects.forEach((data) => {
+    const projectHTML = `
+        <div class="project ${data.isWide ? 'wide' : ''} ${data.isExtra ? 'extra-project' : ''}">
+            <img src="${data.imageUrl}" alt="${data.title}" class="project-img">
+            <div class="project-info">
+                <h3>${data.title}</h3>
+                <p>${data.subtitle}</p>
+            </div>
+        </div>
+    `;
+    projectContainer.insertAdjacentHTML('beforeend', projectHTML);
+});
 
     projectContainer.innerHTML = ""; 
     
@@ -96,3 +117,4 @@ if (userEntry === SECRET_PASSWORD) {
 } else {
     window.location.href = "index.html";
 }
+
