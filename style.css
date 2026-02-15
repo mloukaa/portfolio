@@ -578,6 +578,20 @@ h2 {
 .extra-project.show {
     display: flex !important; /* or 'block' depending on your card style */
 }
+#project-container {
+    display: grid !important;
+    /* This ensures items are placed in order */
+}
+
+.project {
+    /* Normal projects stay at order 1 */
+    order: 1; 
+}
+
+.project.extra-project {
+    /* Extra projects are forced to order 2 (always after order 1) */
+    order: 2 !important; 
+}
 
 
 
