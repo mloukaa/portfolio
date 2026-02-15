@@ -72,6 +72,14 @@ header { position: fixed; width: 100%; top: 0; background: rgba(0,0,0,0.4); back
     padding: 120px 60px !important; 
 }
 .portfolio-spacer { height: 70px; } /* Breath room requested */
+.project, 
+.project.wide, 
+.extra-project.show {
+    display: flex !important;
+    flex-direction: column !important;
+    height: auto !important; /* Allow cards to match content */
+    align-items: flex-start !important; /* Align everything to the left */
+}
 .portfolio {
     display: grid !important;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)) !important;
@@ -100,34 +108,34 @@ header { position: fixed; width: 100%; top: 0; background: rgba(0,0,0,0.4); back
 }
 .project img {
     width: 100% !important;
-    height: 320px !important; /* Slightly taller image to fill the card */
+    height: 340px !important; 
     object-fit: cover !important;
-    display: block;
 }
 /* 4. Shrink the text area to fit the smaller card */
 
-.project-info {
-    /* Reduced vertical padding from 60px to 30px */
-    padding: 30px 35px !important; 
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    /* Aligns text to the top so there is no dead space in the middle */
-    justify-content: flex-start !important; 
+..project-info {
+    /* Fixed padding so text starts at the same spot on EVERY card */
+    padding: 25px 35px !important; 
+    width: 100% !important;
+    box-sizing: border-box !important;
+    
+    /* REMOVE centering logic that causes the "gap" difference */
+    display: block !important; 
+    justify-content: flex-start !important;
+    flex-grow: 0 !important; 
 }
 
 .project-info h3 {
+    margin: 0 0 5px 0 !important; /* Tight, consistent gap */
     font-size: 1.4rem;
-    font-weight: 800;
-    margin-bottom: 5px; /* Reduced space between title and subtitle */
-    color: white;
+    text-align: left !important;
 }
 
 .project-info p {
+    margin: 0 !important;
     font-size: 0.95rem;
-    color: #94a3b8;
+    text-align: left !important;
     line-height: 1.4;
-    margin: 0; /* Ensures no extra bottom margin */
 }
 .load-more-container { display: flex; justify-content: center; padding: 80px 0; }
 .extra-project { display: none; opacity: 0; transform: translateY(30px); }
@@ -648,6 +656,7 @@ h2 {
     from { transform: scale(0.5); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
 }
+
 
 
 
