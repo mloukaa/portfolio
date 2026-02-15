@@ -670,77 +670,98 @@ h2 {
 
 
 /* --- MOBILE RESPONSIVENESS --- */
+/* --- ULTIMATE MOBILE POLISH --- */
 @media (max-width: 768px) {
-    /* 1. Reset Spacing for the whole page */
-    body { padding: 0; margin: 0; }
-    
-    section {
-        padding: 60px 20px !important; /* Shorter padding for mobile */
-    }
-
-    /* 2. Fix Hero Section (The top part) */
+    /* 1. HERO SECTION - Fix text wrapping and alignment */
     .hero {
         padding: 100px 20px 40px !important;
-        text-align: center;
+        display: block !important; /* Stack vertically */
     }
+
     .hero-container {
-        grid-template-columns: 1fr !important; /* Stack columns */
-        gap: 30px;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
     }
+
+    .hero-text {
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
     .hero h1 {
-        font-size: 32px !important; /* Smaller title */
-        line-height: 1.1;
+        font-size: 2.2rem !important; /* Smaller so words stay on same line */
+        line-height: 1.2 !important;
+        padding-right: 0 !important; /* Remove padding that might push text off-center */
+        text-align: center !important;
+        width: 100%;
     }
+
     .hero-sub {
-        font-size: 16px !important;
-        margin-bottom: 30px;
+        font-size: 1rem !important;
+        max-width: 100% !important;
+        text-align: center !important;
     }
 
-    /* 3. The Navigation */
-    .nav {
-        padding: 15px 20px !important;
-    }
-    .nav-links {
-        display: none; /* Hide desktop links on mobile */
-    }
-
-    /* 4. THE PORTFOLIO (The most important part) */
-    #project-container {
-        grid-template-columns: 1fr !important; /* Single column cards */
-        gap: 25px !important;
+    /* 2. AVAILABLE FOR WORK AREA - Center the description */
+    .hero-about-pro {
+        margin-top: 30px !important;
+        padding: 30px 20px !important;
+        border-left: none !important;
+        border-top: 2px solid #3b82f6 !important; /* Move border to top for mobile */
+        border-radius: 20px !important;
+        width: 100% !important;
     }
 
-    .project, .project.wide, .extra-project.show {
-        grid-column: span 1 !important; /* No wide cards on mobile */
-        min-height: auto !important;
+    .about-header {
+        justify-content: center !important;
     }
 
-    .project img {
-        height: 220px !important; /* Smaller images for mobile height */
+    .about-description {
+        text-align: center !important;
+        font-size: 1rem !important;
     }
 
-    .project-info {
-        padding: 15px 20px !important;
-        min-height: 100px !important;
+    /* 3. INFO CARDS - Force centering */
+    .info-section {
+        padding: 60px 20px !important;
     }
 
-    .project-info h3 {
-        font-size: 1.1rem !important;
-    }
-
-    /* 5. Fix Testimonials / Reviews */
-    .review-card {
-        width: 280px !important; /* Smaller cards so they don't overflow */
-        padding: 20px !important;
-    }
-
-    /* 6. Fix Experience Section */
-    .experience-grid {
-        grid-template-columns: 1fr !important;
-    }
-
-    /* 7. Fix Info Cards */
     .card-grid {
         grid-template-columns: 1fr !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    .info-card {
+        width: 100% !important;
+        max-width: 350px !important; /* Don't let them get too wide */
+        padding: 40px 25px !important;
+        text-align: center !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    /* 4. SELECTED WORK - Center the titles and grid */
+    .work .section-header {
+        text-align: center !important;
+        align-items: center !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    #project-container {
+        grid-template-columns: 1fr !important;
+        justify-items: center !important; /* Centers the actual cards */
+    }
+
+    .project {
+        width: 100% !important;
+        max-width: 340px !important; /* Keeps cards looking consistent */
     }
 }
