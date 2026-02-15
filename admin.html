@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Manage Portfolio</title>
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #020617; color: white; padding: 20px; line-height: 1.6; }
+        .container { max-width: 600px; margin: 0 auto; }
+        form { background: #0f172a; padding: 20px; border-radius: 12px; display: flex; flex-direction: column; gap: 15px; border: 1px solid #1e293b; }
+        input, button { padding: 12px; border-radius: 6px; border: 1px solid #334155; background: #1e293b; color: white; }
+        button { background: #3b82f6; cursor: pointer; font-weight: bold; border: none; }
+        button:hover { background: #2563eb; }
+        
+        #manageSection { margin-top: 40px; }
+        .admin-project-item { 
+            display: flex; justify-content: space-between; align-items: center; 
+            background: #0f172a; padding: 12px; margin-bottom: 10px; 
+            border-radius: 8px; border: 1px solid #1e293b; 
+        }
+        .delete-btn { background: #ef4444 !important; padding: 6px 12px; font-size: 0.8rem; }
+        .admin-img-preview { width: 50px; height: 50px; object-fit: cover; border-radius: 4px; border: 1px solid #334155; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Post New Work</h2>
+    <form id="uploadForm">
+        <input type="text" id="title" placeholder="Project Title" required>
+        <input type="text" id="subtitle" placeholder="Subtitle (e.g. Branding)" required>
+        <input type="url" id="imageUrl" placeholder="Image URL (PostImages link)" required>
+        <label><input type="checkbox" id="isWide"> Wide Card (2 columns)?</label>
+        <label><input type="checkbox" id="isExtra"> Hidden (Extra Project)?</label>
+        <button type="submit">Publish to Portfolio</button>
+    </form>
+
+    <div id="manageSection">
+        <h3>Existing Projects</h3>
+        <div id="adminProjectList">Loading projects...</div>
+    </div>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp, query, orderBy, onSnapshot, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyCypUyn9f9P-9id0T7jo8wjnMZEXcxQuLk",
+        authDomain: "tngraphix-portfolio.firebaseapp.com",
+        projectId: "tngraphix-portfolio",
+        storageBucket: "tngraphix-portfolio.firebasestorage.app",
+        messagingSenderId: "1021687000823",
+        appId: "1:1021687000823:web:744790f86259951ba42df2",
+        measurementId: "G-9Z6ZTQDPZJ"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // 1. ADD NEW PROJECT
+    const uploadForm = document.getElementById('uploadForm');
+    uploadForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        try {
+            await addDoc(collection(db, "projects"), {
+                title: document.getElementById('title').value,
+                subtitle: document.getElementById('subtitle').value,
+                imageUrl: document.getElementById('imageUrl').value,
+                isWide: document.getElementById('isWide').checked,
+                isExtra: document.getElementById('isExtra').checked,
+                createdAt: serverTimestamp()
+            });
+            alert("Success!");
+            uploadForm.reset();
+        } catch (err) { alert("Error: " + err.message); }
+    });
+
+    // 2. LIST & DELETE PROJECTS
+    const adminProjectList = document.getElementById('adminProjectList');
+    onSnapshot(query(collection(db, "projects"), orderBy("createdAt", "desc")), (snapshot) => {
+        adminProjectList.innerHTML = "";
+        snapshot.forEach((projectDoc) => {
+            const data = projectDoc.data();
+            const id = projectDoc.id;
+            
+            const itemHTML = `
+                <div class="admin-project-item">
+                    <div style="display: flex; gap: 15px; align-items: center;">
+                        <img src="${data.imageUrl}" class="admin-img-preview">
+                        <div>
+                            <div style="font-weight: bold;">${data.title || 'Untitled'}</div>
+                            <small style="color: #64748b;">${data.isExtra ? 'Hidden' : 'Visible'}</small>
+                        </div>
+                    </div>
+                    <button class="delete-btn" data-id="${id}">Delete</button>
+                </div>
+            `;
+            adminProjectList.insertAdjacentHTML('beforeend', itemHTML);
+        });
+
+        // Attach Delete Logic
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.onclick = async () => {
+                const projectId = btn.getAttribute('data-id');
+                if(confirm("Delete this project?")) {
+                    await deleteDoc(doc(db, "projects", projectId));
+                }
+            };
+        });
+    });
+    // 1. Password Protection Gate
+const SECRET_PASSWORD = "amirmlouka18aze"; // CHANGE THIS!
+const userEntry = prompt("Enter Admin Password to access dashboard:");
+
+if (userEntry !== SECRET_PASSWORD) {
+    alert("Access Denied. Redirecting...");
+    window.location.href = "index.html"; // Sends intruders to your home page
+} else {
+    console.log("Access Granted");
+}
+
+// ... rest of your Firebase code starts here
+</script>
+
+</body>
+</html>
