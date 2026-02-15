@@ -57,28 +57,36 @@ header { position: fixed; width: 100%; top: 0; background: rgba(0,0,0,0.4); back
 .work { padding: 120px 60px; }
 .portfolio-spacer { height: 70px; } /* Breath room requested */
 .portfolio {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)) !important; 
-    gap: 20px !important;
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)) !important;
+    gap: 35px !important;
+    padding: 40px 0 !important;
 }
 
-/* 2. Set a strict small size for the project card */
+/* 2. The Standard Project Card */
 .project {
-    height: 350px !important; /* Reduced from 350px */
-    background: #0f172a;
-    border-radius: 12px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    height: 550px !important; 
+    background: rgba(255, 255, 255, 0.03) !important; 
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-radius: 30px !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    transition: all 0.4s ease !important;
 }
-@media (min-width: 1024px) { .project.wide { grid-column: span 2; } }
+@media (min-width: 1024px) {
+    .portfolio .project.wide {
+        grid-column: span 2 !important; /* Forces it to take 2 slots */
+    }
+}
 .project img {
-    width: 100% !important;
-    height: 220px !important; /* Fixed height for the photo part */
-    object-fit: cover !important; /* This is what does the cropping */
-    object-position: center !important; 
-    display: block !important;
+    width: 100% !important;
+    height: 380px !important; 
+    object-fit: cover !important;
+    object-position: top !important;
+}
 }
 
 /* 4. Shrink the text area to fit the smaller card */
@@ -571,6 +579,7 @@ h2 {
 .extra-project.show {
     display: flex !important; /* or 'block' depending on your card style */
 }
+
 
 
 
