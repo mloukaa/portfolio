@@ -56,6 +56,12 @@ header { position: fixed; width: 100%; top: 0; background: rgba(0,0,0,0.4); back
 /* Portfolio Spacing */
 .work { padding: 120px 60px; }
 .portfolio-spacer { height: 70px; } /* Breath room requested */
+#project-container {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)) !important;
+    gap: 30px !important;
+    width: 100%;
+}
 .portfolio {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)) !important; 
@@ -63,51 +69,64 @@ header { position: fixed; width: 100%; top: 0; background: rgba(0,0,0,0.4); back
 }
 
 /* 2. Set a strict small size for the project card */
-.project {
-    height: 350px !important; /* Reduced from 350px */
-    background: #0f172a;
-    border-radius: 12px;
+project {
+    display: flex !important;
+    flex-direction: column !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 24px !important; /* Slightly tighter corners for a modern look */
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    height: auto !important; /* Height is determined by content */
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    order: 1;
 }
-@media (min-width: 1024px) { .project.wide { grid-column: span 2; } }
+@media (min-width: 1024px) {
+    .project.wide { grid-column: span 2 !important; }
+}
+.project:hover {
+    transform: translateY(-8px);
+    border-color: #3b82f6 !important;
+}
 .project img {
     width: 100% !important;
-    height: 220px !important; /* Fixed height for the photo part */
-    object-fit: cover !important; /* This is what does the cropping */
-    object-position: center !important; 
+    height: 300px !important; /* Fixed image height ensures text starts at same spot */
+    object-fit: cover !important;
     display: block !important;
 }
 
 /* 4. Shrink the text area to fit the smaller card */
 
 .project-info {
-    padding: 8px 12px !important; /* Very small padding to save space */
-    background: #0f172a;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Centers text vertically in the small space */
+    /* Fixed small padding to reduce space */
+    padding: 20px 25px !important; 
+    
+    /* Force top-left alignment so text never "floats" in wide cards */
+    display: block !important; 
+    text-align: left !important;
+    
+    background: transparent !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
 }
+
 .project-info h3 {
-    font-size: 0.95rem !important; /* Slightly smaller title */
-    margin: 0 !important; /* Remove bottom margin */
-    color: white;
-    white-space: nowrap; /* Keeps title on one line */
-    overflow: hidden;
-    text-overflow: ellipsis;
+    margin: 0 0 4px 0 !important; /* Minimal gap between title and subtitle */
+    font-size: 1.25rem !important;
+    font-weight: 800 !important;
+    color: white !important;
+    line-height: 1.2 !important;
+    text-transform: none; /* Keeps it natural */
 }
 
 .project-info p {
-    font-size: 0.75rem !important; /* Smaller subtitle */
-    margin: 2px 0 0 0 !important; /* Tiny gap above subtitle */
-    color: #94a3b8;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    margin: 0 !important;
+    font-size: 0.9rem !important;
+    color: #94a3b8 !important;
+    line-height: 1.4 !important;
 }
+.project.extra-project { display: none !important; order: 10; }
+    .project.extra-project.show { display: flex !important; }
 .load-more-container { display: flex; justify-content: center; padding: 80px 0; }
 .extra-project { display: none; opacity: 0; transform: translateY(30px); }
 .extra-project.show { display: block; animation: fadeInUp 0.8s forwards; }
@@ -630,4 +649,5 @@ h2 {
     from { transform: scale(0.5); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
 }
+
 
