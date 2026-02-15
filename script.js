@@ -1,55 +1,98 @@
-// Load More Logic
-const loadMoreBtn = document.getElementById('loadMoreBtn');
-const extraProjects = document.querySelectorAll('.extra-project');
-if (loadMoreBtn) {
-    loadMoreBtn.addEventListener('click', () => {
-        extraProjects.forEach(project => project.classList.add('show'));
-        loadMoreBtn.style.opacity = '0';
-        setTimeout(() => { loadMoreBtn.parentElement.style.display = 'none'; }, 400);
-    });
-}
+console.log("Firebase Script Loaded!");
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-// Copy Email Logic
-const copyBtn = document.getElementById('copyEmail');
-const copyStatus = document.getElementById('copyStatus');
-if (copyBtn) {
-    copyBtn.addEventListener('click', () => {
-        navigator.clipboard.writeText("mloukaamir36@gmail.com").then(() => {
-            copyStatus.style.opacity = "1";
-            copyStatus.style.height = "auto";
-            copyBtn.textContent = "Copied!";
-            setTimeout(() => {
-                copyStatus.style.opacity = "0";
-                copyStatus.style.height = "0";
-                copyBtn.textContent = "Copy My Email";
-            }, 3000);
-        });
-    });
-}
-
-// Lightbox
-const lightbox = document.getElementById("lightbox");
-const lightboxImg = document.getElementById("lightbox-img");
-const closeBtn = document.querySelector(".close");
-
-document.querySelectorAll(".project-img").forEach(img => {
-    img.addEventListener("click", () => {
-        lightboxImg.src = img.getAttribute("data-full");
-        lightbox.style.display = "flex";
-        document.body.style.overflow = "hidden";
-    });
-});
-
-const closeLightbox = () => {
-    lightbox.style.display = "none";
-    document.body.style.overflow = "auto";
+const firebaseConfig = {
+    apiKey: "AIzaSyCypUyn9f9P-9id0T7jo8wjnMZEXcxQuLk",
+    authDomain: "tngraphix-portfolio.firebaseapp.com",
+    projectId: "tngraphix-portfolio",
+    storageBucket: "tngraphix-portfolio.firebasestorage.app",
+    messagingSenderId: "1021687000823",
+    appId: "1:1021687000823:web:744790f86259951ba42df2",
+    measurementId: "G-9Z6ZTQDPZJ"
 };
-closeBtn.addEventListener("click", closeLightbox);
-lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
-// Simple Mobile Menu Toggle
-    const navLinks = document.querySelector('.nav-links');
-    const logo = document.querySelector('.logo');
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const projectContainer = document.getElementById('project-container');
+
+// Load Data
+onSnapshot(query(collection(db, "projects"), orderBy("createdAt", "desc")), (snapshot) => {
+    console.log("Database connection successful!"); // Checkpoint 1
     
-    logo.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
+    if (!projectContainer) {
+        console.error("Error: Could not find project-container in HTML!"); // Checkpoint 2
+        return;
+    }
+
+    if (snapshot.empty) {
+        console.warn("Database is empty or collection name is wrong."); // Checkpoint 3
+        projectContainer.innerHTML = "<p>No projects found in database.</p>";
+        return;
+    }
+
+    projectContainer.innerHTML = ""; 
+    
+    snapshot.forEach((doc) => {
+        const data = doc.data();
+        console.log("Loading project:", data.title); // Checkpoint 4
+        
+        const projectHTML = `
+            <div class="project ${data.isWide ? 'wide' : ''} ${data.isExtra ? 'extra-project' : ''}">
+                <img src="${data.imageUrl}" data-full="${data.imageUrl}" alt="${data.title}" class="project-img">
+                <div class="project-info">
+                    <h3>${data.title}</h3>
+                    <p>${data.subtitle}</p>
+                </div>
+            </div>
+        `;
+        projectContainer.insertAdjacentHTML('beforeend', projectHTML);
     });
+
+    setupLightbox();
+});
+// Lightbox logic
+function setupLightbox() {
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    document.querySelectorAll(".project-img").forEach(img => {
+        img.onclick = () => {
+            lightboxImg.src = img.getAttribute("data-full");
+            lightbox.style.display = "flex";
+            document.body.style.overflow = "hidden";
+        };
+    });
+}
+
+// Global Close for Lightbox
+const closeBtn = document.querySelector(".close");
+if (closeBtn) {
+    closeBtn.onclick = () => {
+        document.getElementById("lightbox").style.display = "none";
+        document.body.style.overflow = "auto";
+    };
+}
+const loadMoreBtn = document.getElementById('loadMoreBtn');
+
+if (loadMoreBtn) {
+    loadMoreBtn.onclick = () => {
+        console.log("Load More clicked!"); // Check your F12 console for this!
+        
+        const extraProjects = document.querySelectorAll('.extra-project');
+        
+        if (extraProjects.length === 0) {
+            alert("No extra projects found in the database yet.");
+        } else {
+            extraProjects.forEach(p => {
+                p.classList.add('show');
+            });
+            loadMoreBtn.style.display = 'none'; // Hide button after showing everything
+        }
+    };
+}
+if (userEntry === SECRET_PASSWORD) {
+    document.body.classList.add('authorized');
+} else {
+    window.location.href = "index.html";
+}
