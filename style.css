@@ -671,25 +671,76 @@ h2 {
 
 /* --- MOBILE RESPONSIVENESS --- */
 @media (max-width: 768px) {
-    /* ... keep your other mobile code here ... */
-
-    /* Shrink the 01, 02, 03 background numbers */
-    .card-num {
-        font-size: 24px !important; /* Much smaller for mobile */
-        top: 20px !important;      /* Adjust positioning */
-        right: 25px !important;
-        opacity: 0.15 !important;   /* Slightly more visible since they're smaller */
+    /* 1. Reset Spacing for the whole page */
+    body { padding: 0; margin: 0; }
+    
+    section {
+        padding: 60px 20px !important; /* Shorter padding for mobile */
     }
 
-    /* Reduce the massive padding on the cards so they don't look huge */
-    .info-card {
-        padding: 40px 25px !important;
-        border-radius: 20px !important;
+    /* 2. Fix Hero Section (The top part) */
+    .hero {
+        padding: 100px 20px 40px !important;
+        text-align: center;
+    }
+    .hero-container {
+        grid-template-columns: 1fr !important; /* Stack columns */
+        gap: 30px;
+    }
+    .hero h1 {
+        font-size: 32px !important; /* Smaller title */
+        line-height: 1.1;
+    }
+    .hero-sub {
+        font-size: 16px !important;
+        margin-bottom: 30px;
     }
 
-    /* Ensure the text inside cards doesn't stay too narrow */
-    .centered-content p {
-        max-width: 100% !important;
-        font-size: 15px !important;
+    /* 3. The Navigation */
+    .nav {
+        padding: 15px 20px !important;
+    }
+    .nav-links {
+        display: none; /* Hide desktop links on mobile */
+    }
+
+    /* 4. THE PORTFOLIO (The most important part) */
+    #project-container {
+        grid-template-columns: 1fr !important; /* Single column cards */
+        gap: 25px !important;
+    }
+
+    .project, .project.wide, .extra-project.show {
+        grid-column: span 1 !important; /* No wide cards on mobile */
+        min-height: auto !important;
+    }
+
+    .project img {
+        height: 220px !important; /* Smaller images for mobile height */
+    }
+
+    .project-info {
+        padding: 15px 20px !important;
+        min-height: 100px !important;
+    }
+
+    .project-info h3 {
+        font-size: 1.1rem !important;
+    }
+
+    /* 5. Fix Testimonials / Reviews */
+    .review-card {
+        width: 280px !important; /* Smaller cards so they don't overflow */
+        padding: 20px !important;
+    }
+
+    /* 6. Fix Experience Section */
+    .experience-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* 7. Fix Info Cards */
+    .card-grid {
+        grid-template-columns: 1fr !important;
     }
 }
