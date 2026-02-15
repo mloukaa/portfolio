@@ -54,6 +54,20 @@ header { position: fixed; width: 100%; top: 0; background: rgba(0,0,0,0.4); back
 #copyStatus { margin-top: 15px; color: #4ade80; font-weight: 800; font-size: 14px; opacity: 0; transition: 0.3s; height: 0; }
 
 /* Portfolio Spacing */
+#project-container {
+    display: grid !important;
+    /* This ensures items are placed in order */
+}
+
+.project {
+    /* Normal projects stay at order 1 */
+    order: 1; 
+}
+
+.project.extra-project {
+    /* Extra projects are forced to order 2 (always after order 1) */
+    order: 2 !important; 
+}
 .work { 
     padding: 120px 60px !important; 
 }
@@ -577,20 +591,6 @@ h2 {
 /* Show them when the 'show' class is added via JS */
 .extra-project.show {
     display: flex !important; /* or 'block' depending on your card style */
-}
-#project-container {
-    display: grid !important;
-    /* This ensures items are placed in order */
-}
-
-.project {
-    /* Normal projects stay at order 1 */
-    order: 1; 
-}
-
-.project.extra-project {
-    /* Extra projects are forced to order 2 (always after order 1) */
-    order: 2 !important; 
 }
 
 
