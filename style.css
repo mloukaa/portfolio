@@ -56,11 +56,58 @@ header { position: fixed; width: 100%; top: 0; background: rgba(0,0,0,0.4); back
 /* Portfolio Spacing */
 .work { padding: 120px 60px; }
 .portfolio-spacer { height: 70px; } /* Breath room requested */
-.portfolio { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px; }
-.project { background: rgba(0,0,0,0.4); border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); }
+.portfolio {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)) !important; 
+    gap: 20px !important;
+}
+
+/* 2. Set a strict small size for the project card */
+.project {
+    height: 300px !important; /* Reduced from 350px */
+    background: #0f172a;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
 @media (min-width: 1024px) { .project.wide { grid-column: span 2; } }
-.project-img { width: 100%; height: 400px; object-fit: cover; cursor: pointer; }
-.project-info { padding: 30px; }
+.project img {
+    width: 100% !important;
+    height: 220px !important; /* Fixed height for the photo part */
+    object-fit: cover !important; /* This is what does the cropping */
+    object-position: center !important; 
+    display: block !important;
+}
+
+/* 4. Shrink the text area to fit the smaller card */
+
+.project-info {
+    padding: 8px 12px !important; /* Very small padding to save space */
+    background: #0f172a;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers text vertically in the small space */
+}
+.project-info h3 {
+    font-size: 0.95rem !important; /* Slightly smaller title */
+    margin: 0 !important; /* Remove bottom margin */
+    color: white;
+    white-space: nowrap; /* Keeps title on one line */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.project-info p {
+    font-size: 0.75rem !important; /* Smaller subtitle */
+    margin: 2px 0 0 0 !important; /* Tiny gap above subtitle */
+    color: #94a3b8;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 .load-more-container { display: flex; justify-content: center; padding: 80px 0; }
 .extra-project { display: none; opacity: 0; transform: translateY(30px); }
 .extra-project.show { display: block; animation: fadeInUp 0.8s forwards; }
@@ -498,96 +545,31 @@ h2 {
     font-weight: 900 !important;
     margin-top: 5px !important;
 }
+/* Add this to style.css */
+#project-container {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    width: 100%;
+    min-height: 400px; /* Forces the section to stay open */
+    margin-top: 2rem;
+}
 
-   
-@media (max-width: 768px) {
-    /* 1. Kill the Desktop Grid & Center Everything */
-    .hero-container {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 30px !important;
-        padding: 0 15px !important;
-    }
-    .card-num {
-        font-size: 24px !important; /* Much smaller for mobile */
-        top: 20px !important;      /* Adjust positioning */
-        right: 25px !important;
-        opacity: 0.15 !important;   /* Slightly more visible since they're smaller */
-    }
+.project img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    background: #1e293b; /* Shows a dark box while loading */
+}
+/* Hide extra projects by default */
+.extra-project {
+    display: none !important;
+}
 
-    .hero {
-        padding: 100px 15px 50px !important;
-        text-align: center !important;
-    }
-
-    /* 2. Fix the "1 Word Per Line" Title */
-    .hero h1 {
-        font-size: 32px !important; /* Smaller size to keep words together */
-        line-height: 1.2 !important;
-        max-width: 100% !important;
-        padding-right: 0 !important;
-        margin: 0 auto 20px auto !important;
-        display: block !important;
-    }
-
-    /* 3. Fix the About Description (Full Width) */
-    .hero-about-pro {
-        width: 100% !important; /* Forces it to use the whole screen width */
-        max-width: 100% !important;
-        margin: 20px 0 0 0 !important;
-        padding: 25px 15px !important;
-        border-left: none !important;
-        border-top: 2px solid #3b82f6 !important; /* Moves border to top for mobile look */
-        border-radius: 20px !important;
-        background: rgba(255, 255, 255, 0.04) !important;
-    }
-
-    .about-description {
-        font-size: 16px !important;
-        line-height: 1.6 !important;
-        text-align: center !important;
-        display: block !important;
-        width: 100% !important;
-    }
-
-    /* 4. Center Labels and Buttons */
-    .label {
-        text-align: center !important;
-        width: 100% !important;
-        margin-bottom: 10px !important;
-    }
-
-    .hero-actions {
-        display: flex !important;
-        justify-content: center !important;
-        width: 100% !important;
-    }
-
-    .premium-btn {
-        width: 100% !important;
-        max-width: 280px !important;
-        padding: 16px !important;
-    }
-
-    /* 5. Force Grids to 1 Column */
-    .portfolio, .card-grid, .experience-grid {
-        grid-template-columns: 1fr !important;
-        gap: 20px !important;
-    }
-
-    .project.wide {
-        grid-column: span 1 !important;
-    }
-
-    /* 6. Clean up Header */
-    .nav {
-        padding: 15px !important;
-        justify-content: center !important;
-    }
-    .nav-links {
-        display: none !important; /* Hide menu for clean look */
-    }
+/* Show them when the 'show' class is added via JS */
+.extra-project.show {
+    display: flex !important; /* or 'block' depending on your card style */
 }
 
 
