@@ -53,23 +53,30 @@ projects.forEach((data) => {
     projectContainer.insertAdjacentHTML('beforeend', projectHTML);
 });
 
-    projectContainer.innerHTML = ""; 
-    
-    snapshot.forEach((doc) => {
-        const data = doc.data();
-        console.log("Loading project:", data.title); // Checkpoint 4
-        
-        const projectHTML = `
-            <div class="project ${data.isWide ? 'wide' : ''} ${data.isExtra ? 'extra-project' : ''}">
-                <img src="${data.imageUrl}" data-full="${data.imageUrl}" alt="${data.title}" class="project-img">
-                <div class="project-info">
-                    <h3>${data.title}</h3>
-                    <p>${data.subtitle}</p>
-                </div>
+   projectContainer.innerHTML = ""; 
+
+// 2. Convert snapshot to an array so we can sort it
+const projectsArray = [];
+snapshot.forEach(doc => projectsArray.push(doc.data()));
+
+// 3. SORT: Move items where isExtra is true to the end
+projectsArray.sort((a, b) => {
+    return (a.isExtra === b.isExtra) ? 0 : a.isExtra ? 1 : -1;
+});
+
+// 4. Now run your loop on the SORTED array
+projectsArray.forEach((data) => {
+    const projectHTML = `
+        <div class="project ${data.isWide ? 'wide' : ''} ${data.isExtra ? 'extra-project' : ''}">
+            <img src="${data.imageUrl}" alt="${data.title}" class="project-img">
+            <div class="project-info">
+                <h3>${data.title}</h3>
+                <p>${data.subtitle}</p>
             </div>
-        `;
-        projectContainer.insertAdjacentHTML('beforeend', projectHTML);
-    });
+        </div>
+    `;
+    projectContainer.insertAdjacentHTML('beforeend', projectHTML);
+});
 
     setupLightbox();
 });
@@ -117,4 +124,5 @@ if (userEntry === SECRET_PASSWORD) {
 } else {
     window.location.href = "index.html";
 }
+
 
