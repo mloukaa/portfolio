@@ -64,7 +64,7 @@ header { position: fixed; width: 100%; top: 0; background: rgba(0,0,0,0.4); back
 
 /* 2. Set a strict small size for the project card */
 .project {
-    height: 300px !important; /* Reduced from 350px */
+    height: 350px !important; /* Reduced from 350px */
     background: #0f172a;
     border-radius: 12px;
     overflow: hidden;
@@ -571,6 +571,7 @@ h2 {
 .extra-project.show {
     display: flex !important; /* or 'block' depending on your card style */
 }
+
 
 
 
