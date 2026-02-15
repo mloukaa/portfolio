@@ -90,40 +90,49 @@ project {
 }
 .project img {
     width: 100% !important;
-    height: 300px !important; /* Fixed image height ensures text starts at same spot */
+    height: 280px !important; 
     object-fit: cover !important;
-    display: block !important;
 }
 
 /* 4. Shrink the text area to fit the smaller card */
 
 .project-info {
-    /* Fixed small padding to reduce space */
-    padding: 20px 25px !important; 
+    padding: 20px 25px !important;
     
-    /* Force top-left alignment so text never "floats" in wide cards */
-    display: block !important; 
+    /* Change this hex code to your preferred dark background color */
+    background: #0f172a !important; 
+    
+    /* This height must be the same on ALL cards to keep them aligned */
+    height: 110px !important; 
+    
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important; /* Centers text vertically inside the box */
     text-align: left !important;
-    
-    background: transparent !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .project-info h3 {
-    margin: 0 0 4px 0 !important; /* Minimal gap between title and subtitle */
-    font-size: 1.25rem !important;
+    margin: 0 0 4px 0 !important;
+    font-size: 1.2rem !important;
     font-weight: 800 !important;
     color: white !important;
-    line-height: 1.2 !important;
-    text-transform: none; /* Keeps it natural */
+    /* Prevents title from pushing the box down if it's too long */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .project-info p {
     margin: 0 !important;
-    font-size: 0.9rem !important;
+    font-size: 0.85rem !important;
     color: #94a3b8 !important;
-    line-height: 1.4 !important;
+    line-height: 1.4;
+    /* Limits description to 2 lines so the box height stays perfect */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 .project.extra-project { display: none !important; order: 10; }
     .project.extra-project.show { display: flex !important; }
@@ -649,5 +658,6 @@ h2 {
     from { transform: scale(0.5); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
 }
+
 
 
