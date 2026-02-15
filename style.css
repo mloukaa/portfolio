@@ -592,6 +592,26 @@ h2 {
 .extra-project.show {
     display: flex !important; /* or 'block' depending on your card style */
 }
+#project-container {
+    display: grid !important;
+    /* This ensures the grid respects the 'order' property */
+}
+
+.project {
+    /* Regular projects get a low number */
+    order: 1 !important;
+}
+
+.project.extra-project {
+    /* Hidden/Extra projects get a high number, forcing them to the bottom */
+    order: 10 !important;
+}
+
+/* When shown, they still stay at order 10 (the bottom) */
+.extra-project.show {
+    display: flex !important;
+    order: 10 !important;
+}
 
 
 
