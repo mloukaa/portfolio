@@ -795,34 +795,13 @@ h2 {
         width: 100% !important;
         max-width: 340px !important; /* Keeps cards looking consistent */
     } 
-    h1, h2, h3, .section-title, .subtitle, .get-in-touch, .social-proof {
-        text-align: center !important;
-        width: 100%;
-        display: block;
-    }
-
-    /* Target specific sections by their text content if they don't have classes */
-    .experience-title, 
-    .reviews-title, 
-    .portfolio-header, 
-    .career-path-title {
-        text-align: center !important;
-    }
-
-    /* Ensuring the 'Ready to start' and 'Social Proof' wrappers are centered */
-    .footer-content, 
-    .contact-info, 
-    .social-links-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
+   
    
 }
 
   
     
+
 
 
 
