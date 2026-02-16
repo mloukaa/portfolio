@@ -672,6 +672,24 @@ h2 {
 /* --- MOBILE RESPONSIVENESS --- */
 /* --- ULTIMATE MOBILE POLISH --- */
 @media (max-width: 768px) {
+    .project img, 
+    .extra-project img, 
+    .project-img {
+        display: block !important;
+        visibility: visible !important;
+        width: 100% !important;
+        height: 250px !important; /* Force a height so they don't collapse */
+        min-height: 250px !important;
+        object-fit: cover !important;
+        opacity: 1 !important;
+    }
+
+    /* Ensure the card itself isn't hiding the image */
+    .project {
+        overflow: hidden !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
     /* 1. HERO SECTION - Fix text wrapping and alignment */
     header {
         display: none !important;
@@ -768,4 +786,5 @@ h2 {
         max-width: 340px !important; /* Keeps cards looking consistent */
     }
 }
+
 
