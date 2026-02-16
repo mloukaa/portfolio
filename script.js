@@ -41,7 +41,7 @@ onSnapshot(query(collection(db, "projects"), orderBy("createdAt", "desc")), (sna
     projectsArray.forEach((data) => {
         const projectHTML = `
             <div class="project ${data.isWide ? 'wide' : ''} ${data.isExtra ? 'extra-project' : ''}">
-                <img src="${data.imageUrl}" alt="${data.title}" class="project-img">
+                <img src="${data.imageUrl}" alt="${data.title}" class="project-img" loading="eager">
                 <div class="project-info">
                     <h3>${data.title}</h3>
                     <p>${data.subtitle}</p>
@@ -108,4 +108,5 @@ function openFullSize(url) {
     modal.style.display = "flex";
     document.body.style.overflow = "hidden"; // Prevent scrolling
 }
+
 
