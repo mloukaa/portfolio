@@ -110,21 +110,24 @@ function openFullSize(url) {
 }
 
 function copyEmail(email, button) {
-    navigator.clipboard.writeText(email).then(() => {
-        const status = document.getElementById('copyStatus');
-        
-        // Show the "Copied!" message
-        status.style.display = 'block';
-        button.style.opacity = '0.5'; // Visual feedback for the button
+    const el = document.createElement('textarea');
+    el.value = email;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
 
-        // Hide it again after 2 seconds
-        setTimeout(() => {
-            status.style.display = 'none';
-            button.style.opacity = '1';
-        }, 2000);
-    }).catch(err => {
-        alert("Oops, couldn't copy! Email is: " + email);
-    });
+    // Visual Feedback that matches the style
+    const originalText = button.innerText;
+    button.innerText = "COPIED!";
+    button.style.borderColor = "#4ade80"; // Subtle green glow
+    button.style.color = "#4ade80";
+
+    setTimeout(() => {
+        button.innerText = originalText;
+        button.style.borderColor = "rgba(255, 255, 255, 0.2)";
+        button.style.color = "#ffffff";
+    }, 2000);
 }
 
 
