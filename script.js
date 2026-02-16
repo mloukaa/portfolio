@@ -109,26 +109,8 @@ function openFullSize(url) {
     document.body.style.overflow = "hidden"; // Prevent scrolling
 }
 
-function copyEmail(email, button) {
-    const el = document.createElement('textarea');
-    el.value = email;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
 
-    // Visual Feedback that matches the style
-    const originalText = button.innerText;
-    button.innerText = "COPIED!";
-    button.style.borderColor = "#4ade80"; // Subtle green glow
-    button.style.color = "#4ade80";
 
-    setTimeout(() => {
-        button.innerText = originalText;
-        button.style.borderColor = "rgba(255, 255, 255, 0.2)";
-        button.style.color = "#ffffff";
-    }, 2000);
-}
 
 
 
