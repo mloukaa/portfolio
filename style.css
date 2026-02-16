@@ -672,17 +672,27 @@ h2 {
 /* --- MOBILE RESPONSIVENESS --- */
 /* --- ULTIMATE MOBILE POLISH --- */
 @media (max-width: 768px) {
-    .project img, 
+ 
     .extra-project img, 
     .project-img {
         display: block !important;
-        visibility: visible !important;
         width: 100% !important;
-        height: 250px !important; /* Force a height so they don't collapse */
+        /* FORCE the height so it can't be 0px */
+        height: 250px !important; 
         min-height: 250px !important;
+        
+        /* This shows a dark box while the image is loading */
+        background-color: #1e293b !important; 
+        
         object-fit: cover !important;
         opacity: 1 !important;
+        visibility: visible !important;
     }
+    .project-info {
+        margin-top: 0 !important;
+        padding: 20px !important;
+    }
+}
 
     /* Ensure the card itself isn't hiding the image */
     .project {
@@ -786,5 +796,6 @@ h2 {
         max-width: 340px !important; /* Keeps cards looking consistent */
     }
 }
+
 
 
