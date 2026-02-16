@@ -673,26 +673,17 @@ h2 {
 /* --- ULTIMATE MOBILE POLISH --- */
 @media (max-width: 768px) {
  
+  .project img, 
     .extra-project img, 
     .project-img {
         display: block !important;
+        visibility: visible !important;
         width: 100% !important;
-        /* FORCE the height so it can't be 0px */
-        height: 250px !important; 
+        height: 250px !important; /* Force a height so they don't collapse */
         min-height: 250px !important;
-        
-        /* This shows a dark box while the image is loading */
-        background-color: #1e293b !important; 
-        
         object-fit: cover !important;
         opacity: 1 !important;
-        visibility: visible !important;
     }
-    .project-info {
-        margin-top: 0 !important;
-        padding: 20px !important;
-    }
-}
 
     /* Ensure the card itself isn't hiding the image */
     .project {
@@ -700,7 +691,8 @@ h2 {
         display: flex !important;
         flex-direction: column !important;
     }
-    /* 1. HERO SECTION - Fix text wrapping and alignment */
+    
+   /* 1. HERO SECTION - Fix text wrapping and alignment */
     header {
         display: none !important;
     }
@@ -794,8 +786,13 @@ h2 {
     .project {
         width: 100% !important;
         max-width: 340px !important; /* Keeps cards looking consistent */
-    }
+    } 
+   
 }
+
+  
+    
+
 
 
 
