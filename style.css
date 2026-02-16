@@ -30,46 +30,15 @@ header { position: fixed; width: 100%; top: 0; background: rgba(0,0,0,0.4); back
 .about-description { line-height: 1.8; color: #94a3b8; font-size: 18px; }
 
 /* Premium Buttons */
-.premium-bt{
+.premium-bt;
+.copy-btn{
     display: inline-block; padding: 18px 45px; background: #ffffff; color: #020617; 
     text-decoration: none; font-weight: 800; border-radius: 12px; border: none; cursor: pointer;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     text-transform: uppercase; letter-spacing: 1px;
 }
-.premium-btn:hover{ transform: translateY(-5px); background: #3b82f6; color: #fff; box-shadow: 0 15px 30px rgba(59, 130, 246, 0.4); }
-.copy-btn {
-    /* Shape & Size */
-    display: inline-block;
-    padding: 12px 40px;
-    border-radius: 50px; /* Perfect pill shape */
-    
-    /* Background & Glass Effect */
-    background: rgba(255, 255, 255, 0.05); /* Very subtle transparent white */
-    backdrop-filter: blur(10px);          /* Glass blur effect */
-    -webkit-backdrop-filter: blur(10px);
-    
-    /* Border & Glow */
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+.premium-btn:hover;.copy-btn:hover, .copy-btn:active{ transform: translateY(-5px); background: #3b82f6; color: #fff; box-shadow: 0 15px 30px rgba(59, 130, 246, 0.4); }
 
-    /* Text Style */
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: 800;
-    text-transform: uppercase; /* Matches the all-caps look */
-    letter-spacing: 2px;       /* Adds that professional spacing */
-    
-    /* Interaction */
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 20px;
-}
-
-.copy-btn:hover, .copy-btn:active {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.5);
-    transform: translateY(-2px);
-}
 
 /* Info Cards - Centered & Premium */
 .info-section { padding: 120px 60px; }
@@ -825,6 +794,7 @@ h2 {
 
   
     
+
 
 
 
