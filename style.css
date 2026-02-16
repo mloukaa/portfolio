@@ -673,6 +673,13 @@ h2 {
 /* --- MOBILE RESPONSIVENESS --- */
 /* --- ULTIMATE MOBILE POLISH --- */
 @media (max-width: 768px) {
+    .card-num {
+        font-size: 24px;   /* Makes the number much smaller */
+        top: 10px;        /* Pushes it closer to the top edge */
+        right: 15px;      /* Pushes it closer to the right edge */
+        opacity: 0.1;     /* Optional: makes it slightly more visible since it's smaller */
+    }
+}
  
   .project img, 
     .extra-project img, 
@@ -793,6 +800,7 @@ h2 {
 
   
     
+
 
 
 
