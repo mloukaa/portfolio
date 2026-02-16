@@ -795,14 +795,17 @@ h2 {
         width: 100% !important;
         max-width: 340px !important; /* Keeps cards looking consistent */
     } 
-    h2 {align-items: center;
+    h2 , .label {align-items: center;
         text-align: center; 
    
    
 }
+}
+    
 
   
     
+
 
 
 
