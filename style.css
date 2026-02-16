@@ -30,13 +30,17 @@ header { position: fixed; width: 100%; top: 0; background: rgba(0,0,0,0.4); back
 .about-description { line-height: 1.8; color: #94a3b8; font-size: 18px; }
 
 /* Premium Buttons */
-.premium-btn {
+.premium-bt;
+.copy-btn
+{
     display: inline-block; padding: 18px 45px; background: #ffffff; color: #020617; 
     text-decoration: none; font-weight: 800; border-radius: 12px; border: none; cursor: pointer;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     text-transform: uppercase; letter-spacing: 1px;
 }
-.premium-btn:hover { transform: translateY(-5px); background: #3b82f6; color: #fff; box-shadow: 0 15px 30px rgba(59, 130, 246, 0.4); }
+.premium-btn:hover;
+.copy-btn:hover, 
+.copy-btn:active{ transform: translateY(-5px); background: #3b82f6; color: #fff; box-shadow: 0 15px 30px rgba(59, 130, 246, 0.4); }
 
 /* Info Cards - Centered & Premium */
 .info-section { padding: 120px 60px; }
@@ -792,6 +796,7 @@ h2 {
 
   
     
+
 
 
 
