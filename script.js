@@ -109,4 +109,22 @@ function openFullSize(url) {
     document.body.style.overflow = "hidden"; // Prevent scrolling
 }
 
+function copyEmail(email, button) {
+    navigator.clipboard.writeText(email).then(() => {
+        // Change button text to show it worked
+        const originalText = button.innerText;
+        button.innerText = "Copied!";
+        button.style.backgroundColor = "#22c55e"; // Turn green
+
+        // Change it back after 2 seconds
+        setTimeout(() => {
+            button.innerText = originalText;
+            button.style.backgroundColor = ""; // Reset to CSS default
+        }, 2000);
+    }).catch(err => {
+        console.error('Failed to copy: ', err);
+        alert("Could not copy. Please manually copy: " + email);
+    });
+}
+
 
